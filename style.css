@@ -1,6 +1,5 @@
 html {
     box-sizing: border-box;
-    background: linear-gradient(#3032468c,#6666694f);
 }
 
 *,
@@ -31,9 +30,7 @@ li {
 }
 
 .container > div {
-    border-radius: 1rem;
     padding: 3rem 20vw;
-    box-shadow: 5px 5px 10px 2px #888888;
     background-color: white;
 }
 
@@ -63,5 +60,5 @@ li {
 /* GAME AREA */
 
 .game {
-    height: 70vh;
+    height: 75vh;
 }
