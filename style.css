@@ -61,4 +61,12 @@ li {
 
 .game {
     height: 75vh;
+    display: flex;
+    flex-flow: column nowrap;
+    gap: 2rem;
+}
+
+.game__scoreboard {
+    display: flex;
+    justify-content: space-around;
 }
