@@ -70,3 +70,60 @@ li {
     display: flex;
     justify-content: space-around;
 }
+
+.scoreboard__scorer-name {
+    font-size: 4rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-family: "monospace";
+}
+
+.scoreboard__score-number {
+    font-size: 4rem;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    font-weight: 700;
+    font-family: "monospace";
+}
+
+.scoreboard__rounds {
+    font-size: 2rem;
+    font-family: "monospace";
+}
+
+.player {
+    color: lightgreen;
+}
+
+.ai {
+    color: orangered;
+}
+
+.game__platform {
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+}
+
+.platform__player-choice-list {
+    display: flex;
+    flex-flow: column nowrap;
+    gap: 1.5rem;
+}
+
+.platform__player-choice-item {
+    display: flex;
+}
+
+.platform__player-choice-item a {
+    background-color: silver;
+    font-size: 1.5rem;
+    padding: 1rem;
+    border-radius: 1rem;
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
