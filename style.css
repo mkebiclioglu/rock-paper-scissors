@@ -63,12 +63,18 @@ li {
     height: 75vh;
     display: flex;
     flex-flow: column nowrap;
-    gap: 2rem;
+    gap: 4rem;
 }
 
 .game__scoreboard {
     display: flex;
     justify-content: space-around;
+}
+
+.scoreboard__score-holder {
+    display: flex;
+    flex-flow: column nowrap;
+    gap: 2rem;
 }
 
 .scoreboard__scorer-name {
@@ -91,6 +97,8 @@ li {
 .scoreboard__rounds {
     font-size: 2rem;
     font-family: "monospace";
+    display: flex;
+    align-items: center;
 }
 
 .player {
@@ -108,32 +116,46 @@ li {
     gap: 1.5rem;
 }
 
-.platform__player-choice-list {
+.game__controls {
     display: flex;
-    flex-flow: column nowrap;
-    gap: 1.5rem;
+    justify-content: center;
 }
 
-.platform__player-choice-item {
+.controls__player-choice-list {
+    display: flex;
+    gap: 1rem;
+}
+
+.controls__player-choice-item {
     display: flex;
 }
 
-.platform__player-choice-item a {
+.controls__player-choice-item a {
     background-color: silver;
     font-size: 1.5rem;
+    font-weight: 700;
+    color: white;
     padding: 1rem;
     border-radius: 1rem;
+    width: 9rem;
     flex: 1;
     display: flex;
     justify-content: center;
     align-items: center;
+    transition: all ease-out 0.5s;
+}
+
+.controls__player-choice-item a:hover {
+    box-shadow: 3px 3px 18px #888888;
+    transform: scale(1.05);
 }
 
 .platform__player-selection,
 .platform__ai-selection {
     border: 1px solid black;
-    width: 15rem;
-    height: 100%;
+    border-radius: 1rem;
+    width: 20rem;
+    height: 20rem;
 }
 
 .platform__results {
