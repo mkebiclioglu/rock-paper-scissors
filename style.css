@@ -163,18 +163,5 @@ li {
     justify-content: center;
     align-items: center;
     width: 15rem;
-}
-
-.platform__results > div {
     font-size: 1.5rem;
-}
-
-/* To test the game, delete after development */
-.play-button {
-    color: black;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 10rem;
-    font-size: 5rem;
 }
