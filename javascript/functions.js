@@ -27,7 +27,7 @@ export const choiceClicked = (evt) => {
             break;
     }
     if (game.roundCount == constants.END_ROUND) {
-        
+        resetGame();
     }
     setRoundCount();
 };
@@ -67,16 +67,18 @@ const calcRoundWinner = () => {
 };
 
 const resetGame = () => {
-    
+    location.reload();
 }
 
 // ########### SETTERS ####################
 
 const setResultText = (input) => {
+    if (isLastRound()) { return; }
     game.resultText = input;
 };
 
 const increaseScore = (curTurn) => {
+    if (isLastRound()) { return; }
     if (curTurn == constants.PLAYER) {
         game.curPlayerScore++;
     } else if (curTurn == constants.COMPUTER) {
@@ -85,11 +87,22 @@ const increaseScore = (curTurn) => {
 }
 
 const setRoundCount = () => {
-    game.roundCount++;
+    if (isLastRound()) {
+        return;
+    } else {
+        game.roundCount++;
+    }
 };
 
 // ########### HELPER FUNCTIONS ####################
 
 const getRandInt = () => {
     return Math.floor(Math.random() * 3 + 1);
+};
+
+const isLastRound = () => {
+    if (game.roundCount > constants.END_ROUND) {
+        return true;
+    }
+    return false;
 };
