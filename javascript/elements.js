@@ -7,7 +7,11 @@ const domElements = {
     platformResults: document.querySelector(".platform__results"),
 
     // Control Elements
-    playerChoiceItem: document.querySelectorAll(".controls__player-choice-item a")
+    playerChoiceItem: document.querySelectorAll(".controls__player-choice-item a"),
+
+    // Image elements
+    playerChoiceImg: document.querySelector(".platform__player-selection"),
+    computerChoiceImg: document.querySelector(".platform__ai-selection")
 }
 
 export default domElements;

@@ -142,7 +142,7 @@ li {
     display: flex;
     justify-content: center;
     align-items: center;
-    transition: all ease-out 0.5s;
+    transition: all ease-out 0.2s;
 }
 
 .controls__player-choice-item a:hover {
@@ -162,6 +162,7 @@ li {
     display: flex;
     justify-content: center;
     align-items: center;
+    text-align: center;
     width: 15rem;
     font-size: 1.5rem;
 }

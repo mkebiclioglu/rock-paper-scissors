@@ -1,130 +1,95 @@
+import domElements from "./elements.js";
+import game from "./game.js";
+import constants from "./constants.js";
 
+export const loadGame = (evt) => {
+    domElements.playerScore.innerText = game.curPlayerScore;
+    domElements.computerScore.innerText = game.curComputerScore;
+    domElements.scoreboardRounds.innerText = `${game.roundCount} / ${constants.END_ROUND}`;
+    domElements.platformResults.innerText = game.resultText;
+};
 
+export const choiceClicked = (evt) => {
+    game.curPlayerChoice = evt.target.dataset.sign;
+    computerPlay();
+    calcRoundWinner();
+    switch (game.roundWinner) {
+        case constants.PLAYER:
+            increaseScore(constants.PLAYER);
+            setResultText(`You win this round!\n\n ${game.curPlayerChoice} beats ${game.curComputerChoice}`);
+            break;
+        case constants.COMPUTER:
+            increaseScore(constants.COMPUTER);
+            setResultText(`You Lost this round :(\n\n ${game.curComputerChoice} beats ${game.curPlayerChoice}`);
+            break;
+        case constants.TIE:
+            setResultText(`Round is tied!\n\n ${game.curComputerChoice} and ${game.curPlayerChoice}`);
+            break;
+    }
+    if (game.roundCount == constants.END_ROUND) {
+        
+    }
+    setRoundCount();
+};
 
+const computerPlay = () => {
+    switch (getRandInt()) {
+        case 1:
+            game.curComputerChoice = "Rock";
+            break;
+        case 2:
+            game.curComputerChoice = "Paper";
+            break;
+        default:
+            game.curComputerChoice = "Scissors";
+            break;
+    }
+};
 
-// /*
-//     Run this function to start a game of Rock, Paper, Scissors
-// */
+const calcRoundWinner = () => {
+    switch (game.curPlayerChoice.concat(game.curComputerChoice)) {
+        case "RockScissors":
+        case "PaperRock":
+        case "ScissorsPaper":
+            game.roundWinner = constants.PLAYER;
+            break;
+        case "ScissorsRock":
+        case "RockPaper":
+        case "PaperScissors":
+            game.roundWinner = constants.COMPUTER;
+            break;
+        case "ScissorsScissors":
+        case "RockRock":  
+        case "PaperPaper":
+            game.roundWinner = constants.TIE;
+            break;
+    }
+};
 
-// function game() {
-//     let playerScore = 0;
-//     let computerScore = 0;
-//     console.log("Game is starting, 5 rounds of play");
-//     for (let i = 0; i < 5; i++) {
-//         let roundResult = playRound(playerPlay(), computerPlay());
-//         if (roundResult == 1) {
-//             playerScore++;
-//         } else if (roundResult == -1) {
-//             computerScore++;
-//         }
-//         console.log(`Player: ${playerScore} and Computer: ${computerScore}`)
-//     }
-//     declareWinner(playerScore, computerScore);
-// }
+const resetGame = () => {
+    
+}
 
+// ########### SETTERS ####################
 
-// /*
-//     Player and computer selections are compared and winner of round is decided.
-// */
-// function playRound(playerSelection, computerSelection) {
-//     switch (playerSelection.concat(computerSelection)) {
-//         case "RockScissors":
-//         case "PaperRock":
-//         case "ScissorsPaper":
-//             updateResults(`You win! ${playerSelection} beats ${computerSelection}`);
-//             return 1;
-//         case "ScissorsRock":
-//         case "RockPaper":
-//         case "PaperScissors":
-//             updateResults(`You Lost :( ${computerSelection} beats ${playerSelection}`);
-//             return -1;
-//         case "ScissorsScissors":
-//         case "RockRock":  
-//         case "PaperPaper":
-//             updateResults(`Tie! ${computerSelection} and ${playerSelection}`);
-//             return 0;
-//         default:
-//             updateResults("Thats a win for the computer!");
-//             return -1; //Quitting in the middle of the round is a win for computer.
-//     }
-// }
+const setResultText = (input) => {
+    game.resultText = input;
+};
 
-// /*
-//     Prompts the user for a choice.
-// */
-// function playerPlay(playerChoice) { 
-//     console.log(toTitleCase(playerChoice));
-//     return toTitleCase(playerChoice);
-// }
+const increaseScore = (curTurn) => {
+    if (curTurn == constants.PLAYER) {
+        game.curPlayerScore++;
+    } else if (curTurn == constants.COMPUTER) {
+        game.curComputerScore++;
+    }
+}
 
-// /* 
-//     Make the computer return a random choice.
-// */
-// function computerPlay() {
-//     switch (getRandInt()) {
-//         case 1:
-//             return "Rock";
-//         case 2:
-//             return "Paper";
-//         default:
-//             return "Scissors";
-//     }
-// }
+const setRoundCount = () => {
+    game.roundCount++;
+};
 
-// /*
-//     Prints the game result to console.
-// */
-// function declareWinner(playerScore, computerScore) {
-//     console.log(`Player score is ${playerScore} and computer score is ${computerScore}`);
-//     if (playerScore > computerScore) {
-//         console.log("Player wins!")
-//     } else if (computerScore > playerScore) {
-//         console.log("Computer wins!")
-//     } else {
-//         console.log("Its a tie!")
-//     }
-// }
+// ########### HELPER FUNCTIONS ####################
 
-// // ########### HELPER FUNCTIONS ####################
-
-// /*
-//     Return a random number between 1 and 3(inclusive).
-// */
-// function getRandInt() {
-//     return Math.floor(Math.random() * 3 + 1);
-// }
-
-// /*
-//     Checks if the user input is one of the available choices.
-// */
-// function checkValidChoice(choice) {
-//     let upperChoice = choice.toUpperCase();
-//     if (upperChoice == "ROCK" || upperChoice == "PAPER" || upperChoice == "SCISSORS") {
-//         return true;
-//     }
-//     return false;
-// }
-
-// /*
-//     Converts string to title case.
-// */
-// function toTitleCase(string) {
-//     let firstPart = string
-//         .slice(0,1)
-//         .toUpperCase();
-//     let secondPart = string
-//         .slice(1)
-//         .toLowerCase();
-//     return firstPart.concat(secondPart);
-// }
-
-// /*
-//     Checks for null value
-// */
-// function checkNull(input) {
-//     return input === null;
-// }
-
-// function updateResults(input) {
-//     platformResults.innerText = input;
-// }
+const getRandInt = () => {
+    return Math.floor(Math.random() * 3 + 1);
+};
