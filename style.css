@@ -99,6 +99,7 @@ li {
     font-family: "monospace";
     display: flex;
     align-items: center;
+    text-align: center;
 }
 
 .player {
@@ -111,14 +112,19 @@ li {
 
 .game__platform {
     display: flex;
-    justify-content: space-evenly;
+    justify-content: center;
     align-items: center;
+    flex-flow: column nowrap;
     gap: 1.5rem;
 }
 
 .game__controls {
     display: flex;
-    justify-content: center;
+    justify-content: space-between;
+    align-items: center;
+    flex-flow: column nowrap;
+    gap: 1rem;
+    height: 25vh;
 }
 
 .controls__player-choice-list {
@@ -142,7 +148,7 @@ li {
     display: flex;
     justify-content: center;
     align-items: center;
-    transition: all ease-out 0.2s;
+    transition: all ease-out 0.1s;
 }
 
 .controls__player-choice-item a:hover {
@@ -150,19 +156,42 @@ li {
     transform: scale(1.05);
 }
 
-.platform__player-selection,
-.platform__ai-selection {
-    border: 1px solid black;
-    border-radius: 1rem;
-    width: 20rem;
-    height: 20rem;
-}
 
 .platform__results {
+    font-family: "monospace";
     display: flex;
     justify-content: center;
     align-items: center;
     text-align: center;
-    width: 15rem;
-    font-size: 1.5rem;
+    width: 20rem;
+    font-size: 2.5rem;
 }
+
+.platform__results--final {
+    font-size: 1rem;
+}
+
+.reset-btn {
+    background-color: silver;
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: white;
+    padding: 1rem;
+    border-radius: 1rem;
+    width: 30rem;
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.reset-btn:hover {
+    border: 2px solid orangered;
+}
+
+.game__result {
+    font-size: 3.5rem;
+    font-family: "monospace";
+    text-align: center;
+}
+

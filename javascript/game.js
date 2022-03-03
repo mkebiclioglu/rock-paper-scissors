@@ -4,9 +4,8 @@ const game = {
     curPlayerChoice: "",
     curComputerChoice: "",
     roundWinner: "",
-    roundCount: 1,
-    playerChoiceImg: "",
-    computerChoiceImg: "",
+    gameWinner: "",
+    roundCount: 0,
     resultText: "Rock, Paper\n or \nScissors?"
 };
 

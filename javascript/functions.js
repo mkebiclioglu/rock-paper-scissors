@@ -5,7 +5,7 @@ import constants from "./constants.js";
 export const loadGame = (evt) => {
     domElements.playerScore.innerText = game.curPlayerScore;
     domElements.computerScore.innerText = game.curComputerScore;
-    domElements.scoreboardRounds.innerText = `${game.roundCount} / ${constants.END_ROUND}`;
+    domElements.scoreboardRounds.innerText = `${game.roundCount} \n--\n ${constants.END_ROUND}`;
     domElements.platformResults.innerText = game.resultText;
 };
 
@@ -23,11 +23,29 @@ export const choiceClicked = (evt) => {
             setResultText(`You Lost this round :(\n\n ${game.curComputerChoice} beats ${game.curPlayerChoice}`);
             break;
         case constants.TIE:
+            increaseScore(constants.PLAYER);
+            increaseScore(constants.COMPUTER);
             setResultText(`Round is tied!\n\n ${game.curComputerChoice} and ${game.curPlayerChoice}`);
             break;
     }
-    if (game.roundCount == constants.END_ROUND) {
-        resetGame();
+    if (game.roundCount + 1 == constants.END_ROUND) {
+        showResetBtn();
+        calcGameWinner();
+        const gameResult = document.createElement("div");
+        switch (game.gameWinner) {
+            case constants.PLAYER:
+                gameResult.innerText = "You won the game!";
+                break;
+            case constants.COMPUTER:
+                gameResult.innerText = "You lost the game...";
+                break;
+            case constants.TIE:
+                gameResult.innerText = "The game is a tie";
+                break;
+        }
+        gameResult.classList.add("game__result");
+        domElements.platformResults.classList.add("platform__results--final");
+        domElements.gamePlatform.prepend(gameResult);
     }
     setRoundCount();
 };
@@ -66,43 +84,51 @@ const calcRoundWinner = () => {
     }
 };
 
+const calcGameWinner = () => {
+    if (game.curPlayerScore > game.curComputerScore) {
+        game.gameWinner = constants.PLAYER;
+    } else if (game.curPlayerScore == game.curComputerScore) {
+        game.gameWinner = constants.TIE;
+    } else {
+        game.gameWinner = constants.COMPUTER;
+    }
+};
+
 const resetGame = () => {
     location.reload();
-}
+};
+
+const showResetBtn = () => {
+    for (let item of domElements.playerChoiceItem) {
+        item.remove();
+    }
+    const resetBtn = document.createElement("a");
+    resetBtn.innerText = "RESET";
+    resetBtn.classList.add("reset-btn");
+    domElements.controlsPlayerChoice.appendChild(resetBtn);
+    resetBtn.addEventListener("click", resetGame);
+};
 
 // ########### SETTERS ####################
 
 const setResultText = (input) => {
-    if (isLastRound()) { return; }
     game.resultText = input;
 };
 
 const increaseScore = (curTurn) => {
-    if (isLastRound()) { return; }
     if (curTurn == constants.PLAYER) {
         game.curPlayerScore++;
     } else if (curTurn == constants.COMPUTER) {
         game.curComputerScore++;
     }
-}
+};
 
 const setRoundCount = () => {
-    if (isLastRound()) {
-        return;
-    } else {
-        game.roundCount++;
-    }
+    game.roundCount++;
 };
 
 // ########### HELPER FUNCTIONS ####################
 
 const getRandInt = () => {
     return Math.floor(Math.random() * 3 + 1);
-};
-
-const isLastRound = () => {
-    if (game.roundCount > constants.END_ROUND) {
-        return true;
-    }
-    return false;
 };

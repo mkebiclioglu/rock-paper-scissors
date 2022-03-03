@@ -1,6 +1,4 @@
-import constants from "./constants.js";
 import domElements from "./elements.js";
-import game from "./game.js";
 import { 
     choiceClicked,
     loadGame
